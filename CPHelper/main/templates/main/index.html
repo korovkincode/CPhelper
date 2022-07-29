@@ -1,0 +1,120 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+
+<nav class="navbar bg-light container-xl">
+        <div id="nav-container" class="container-xl">
+            <div class="logo">
+                <a class="navbar-brand" href="#">
+                    <img src="static/main/logo-removebg-preview.png" alt="" width="100px" height="30px">
+                </a>
+            </div>
+            <div class="tagline txt-rotate" data-rotate='["Your smart CP platforms tracker"]'>
+                <!--Your smart CP platforms tracker-->
+            </div>
+            <div class="links">
+                <a class="about scroll-to" href="#about-sec">About us</a>
+                <a class="facilities scroll-to" href="#facilities-sec">Facilities</a>
+                <a class="contact scroll-to" href="#about-sec">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <div id="reg" class="container-xl">
+        <div class="title">
+            <p>This is CPhelper</p>
+        </div>
+        <div class="reg-btn-group">
+            <button type="button" id="log-in" class="btn btn-primary">Log in</button>
+            <button type="button" id="sign-up" class="btn btn-outline-secondary">Sign up</button>
+        </div>
+    </div>
+    <a name="facilities"></a>
+    <div id="facilities-sec" class="container-xl">
+        <div class="title">
+            <p>What we do</p>
+        </div>
+        <div class="sub-title">
+            <p>Here some facilities which can improve your experience from CP</p>
+        </div>
+        <div class="row g-3">
+            <div class="col-lg-3">
+                <div class="card anounce" style="width: 18rem;">
+                    <img src="static/main/anounce-logo.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" style="text-align: center;">Don't miss contests</h5>
+                        <p class="card-text" style="text-align: center;">The contests tab will help you track important
+                            tournaments</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card db-tracker" style="width: 18rem;">
+                    <img src="static/main/db-tracker-logo-2.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" style="text-align: center;">Track dashboard</h5>
+                        <p class="card-text" style="text-align: center;"> Follow the latest news only from the platforms
+                            you need or from all at once</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card platforms" style="width: 18rem;">
+                    <img src="static/main/platforms-logo-2.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" style="text-align: center;">Popular platforms included</h5>
+                        <p class="card-text" style="text-align: center;">We support the best and most popular CP
+                            platforms</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a name="about"></a> <a name="contact"></a>
+    <div id="about-sec" class="container-xl contact-sec">
+        <div class="row g-3">
+            <div class="col-md-3 about-cp">
+                <div class="title">
+                    <h5>About CPhelper</h5>
+                </div>
+                <div class="text">
+                    <p> CPhelper - this is your smart assistant startup for CP, facilitating the daily use of popular
+                        programming platforms, tracking news and contests</p>
+                </div>
+            </div>
+            <div class="col-md-3 about-links">
+                <div class="title">
+                    <h5>Credits</h5>
+                </div>
+                <div class="text">
+                    <a href="https://codeforces.com/" target="_blank">CodeForces</a>
+                    <a href="https://www.codechef.com/" target="_blank">CodeChef</a>
+                    <a href="https://atcoder.jp/" target="_blank">AtCoder</a>
+                </div>
+            </div>
+            <div class="col-md-3 about-social">
+                <div class="title">
+                    <h5>Social</h5>
+                </div>
+                <div class="text">
+                    <div id="number" class="media">
+                        <img src="..." alt="">
+                        <p class="name">+4915227627569</p>
+                    </div>
+                    <div id="email" class="media">
+                        <img src="..." alt="">
+                        <p class="name">yourcphelper@gmail.com</p>
+                    </div>
+                    <div id="github" class="media">
+                        <img src="static/main/github-icon.png" width="20px" height="20px" alt="">
+                        <p class="name"><a href="#" style="text-decoration: none; color: black;">Github</a></p>
+                    </div>
+                    <!--<div class="media">
+                        <img src="..." alt="">
+                        <p class="name">another social</p>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
