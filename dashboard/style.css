@@ -1,0 +1,42 @@
+#dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0px;
+    margin-top: 1rem;
+}
+
+#dashboard .title {
+    margin-bottom: 15px;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 41px;
+    text-align: center;
+    text-transform: uppercase;
+    color: rgb(20, 46, 116);
+}
+
+#dashboard .card {
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(0, 255, 255, 0.2);
+}
+
+#dashboard .card {
+    border-radius: 1rem;
+    border-color: rgb(255, 178, 62);
+}
+
+#dashboard .card h6 {
+    text-indent: 1%;
+}
+
+#dashboard .card p {
+    text-indent: 5%;
+}
+
+#dashboard .card a {
+    text-decoration: none;
+}
