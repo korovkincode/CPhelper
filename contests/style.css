@@ -1,14 +1,15 @@
-#dashboard {
+#contests {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     flex-direction: column;
-    padding: 0px;
     position: relative;
     flex: 1 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 
-#dashboard::before {
+#contests::before {
     content: "";
     z-index: -1;
     position: absolute;
@@ -21,9 +22,9 @@
     opacity: 0.3;
 }
 
-#dashboard .title {
-    padding-top: 15px;
-    margin-bottom: 15px;
+#contests .title {
+    padding-top: 1rem;
+    margin-bottom: 1rem;
     font-weight: 400;
     font-size: 40px;
     line-height: 41px;
@@ -32,24 +33,24 @@
     color: rgb(20, 46, 116);
 }
 
-#dashboard .card {
-    margin-bottom: 15px;
-    margin-left: auto;
-    margin-right: auto;
+#contests .table {
     position: relative;
     z-index: 0;
     overflow: hidden;
-    /*if you want to crop the image*/
+    margin-bottom: 0px;
+}
+
+#contests .tb {
     border: 10px solid;
     border-image-slice: 1;
     border-width: 5px;
     border-image-source:
-        linear-gradient(to right,
+        linear-gradient(to left,
             rgb(90, 185, 230),
             rgba(56, 109, 255, 0.4));
 }
 
-#dashboard .card::before {
+#contests .table::before {
     content: "";
     z-index: -1;
     position: absolute;
@@ -59,19 +60,39 @@
     background-size: cover;
     width: 100%;
     height: 100%;
-    opacity: 0.5;
+    opacity: 0.4;
 }
 
-#dashboard .card h6 {
-    text-indent: 1%;
+#contests tr:last-child {
+    border-bottom-color: #FFF;
 }
 
-#dashboard .card p {
-    text-indent: 5%;
+#contests th,
+#contests td {
+    vertical-align: middle;
+    text-align: center;
+    border: 0px;
 }
 
-#dashboard .card a {
-    text-decoration: none;
-    font-size: 18px;
-    padding-right: 2rem;
+#contests .editors {
+    font-style: oblique;
+    width: 20%;
+}
+
+@media (max-width: 585px) {
+
+    #contests .date,
+    #contests .duration,
+    #contests .date-h,
+    #contests .duration-h {
+        display: none;
+    }
+}
+
+@media (max-width: 1140px) {
+
+    #contests .editors,
+    #contests .editors-h {
+        display: none;
+    }
 }
