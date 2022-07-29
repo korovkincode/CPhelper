@@ -1,0 +1,59 @@
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: black;
+}
+
+#nav-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+#nav-container .navbar-brand {
+    margin: 0px;
+}
+
+#nav-container .logo {
+    margin: 0px;
+    width: 100px;
+}
+
+#nav-container .tagline {
+    text-align: center;
+    margin: 0px;
+    width: 50%;
+}
+
+#nav-container #nav-dropdown{
+    width: 100px;
+}
+
+#nav-container #nav-dropdown .dropdown-menu {
+    margin-right: 3%;
+    margin-top: 15px;
+    border-radius: 0;
+    border: 1px darkgrey solid;
+    z-index: 2;
+}
+
+#nav-container #nav-dropdown .dropdown-item {
+    text-align: center;
+    
+}
+
+@media (min-width: 1140px) {
+    #nav-container {
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+}
+
+@media (max-width: 585px) {
+    #nav-container .tagline {
+        display: none;
+    }
+}
