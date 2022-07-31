@@ -1,0 +1,224 @@
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100%;
+    position: relative;
+    z-index: 0;
+}
+
+body::before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-image: url('/cp/img/card-bg.jfif');
+    background-size: cover;
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
+    opacity: 0.4;
+}
+
+#nav-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+#nav-container .navbar-brand {
+    margin: 0px;
+}
+
+#nav-container .logo {
+    margin: 0px;
+    width: 100px;
+}
+
+#nav-container .tagline {
+    text-align: center;
+    margin: 0px;
+    width: 50%;
+}
+
+#nav-container #nav-dropdown {
+    width: 100px;
+}
+
+#nav-container #nav-dropdown .dropdown-menu {
+    margin-right: 3%;
+    margin-top: 15px;
+    border-radius: 0;
+    border: 1px darkgrey solid;
+    z-index: 2;
+}
+
+#nav-container #nav-dropdown .dropdown-item {
+    text-align: center;
+
+}
+
+#settings .title {
+    margin-bottom: 1rem;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 41px;
+    text-align: center;
+    text-transform: uppercase;
+    color: rgb(20, 46, 116);
+}
+
+#settings .settings-block {
+    padding: 1rem;
+    position: relative;
+    box-shadow: 0px 4px 1px 0px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+#settings .settings-block::before {
+    position: absolute;
+    z-index: -1;
+    content: "";
+    background-image: url(/cp/img/card-bg.jfif);
+    opacity: 0.5        ;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+#settings .active-side .title {
+    margin-bottom: 1rem;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 31px;
+    text-align: left;
+    text-indent: 2rem;
+    text-transform: uppercase;
+    color: rgb(20, 46, 116);
+}
+
+#settings #sub-platforms .active-side .form-switch {
+    margin-left: 5rem;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+#settings #sub-platforms .active-side .form-check-input {
+    width: 3em;
+    height: 1.5em;
+}
+
+#settings #sub-platforms .active-side .form-check-label {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 21px;
+    text-transform: uppercase;
+    text-align: center;
+    height: 1.5rem;
+    display: flex;
+    align-items: end;
+    margin-top: 0.15rem;
+    margin-left: 0.5rem;
+}
+
+#settings #sub-platforms .passive-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-right: 4rem;
+}
+
+#settings #sub-platforms .passive-side .text {
+    text-indent: 1rem;
+    margin-bottom: 2rem;
+}
+
+#settings #sub-platforms .passive-side .btn {
+    width: 7rem;
+}
+
+#settings #about-user .active-side .text {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 21px;
+    text-align: left;
+    margin-left: 3rem;
+}
+
+@media (max-width: 768px) {
+    #settings #sub-platforms {
+        justify-content: center;
+        flex-direction: column;
+        padding-right: 1rem;
+    }
+
+    #settings #sub-platforms .active-side {
+        width: 100%;
+    }
+
+    #settings #sub-platforms .active-side .title {
+        text-align: center;
+        text-indent: 0%;
+    }
+
+    #settings #sub-platforms .active-side .form-check {
+        margin-left: 2rem;
+        display: flex;
+        justify-content: center;
+        padding: 0px;
+    }
+
+    #settings #sub-platforms .passive-side {
+        margin-top: 2rem;
+        padding-right: 0;
+        width: 100%;
+    }
+
+    #settings #about-user {
+        justify-content: center;
+        flex-direction: column;
+        padding-right: 1rem;
+    }
+
+    #settings #about-user .active-side {
+        width: 100%;
+    }
+
+    #settings #about-user .active-side .title {
+        text-align: center;
+        text-indent: 0%;
+    }
+
+    #settings #about-user .active-side .text {
+        text-align: center;
+        padding: 0px;
+        margin-left: 0px;
+    }
+}
+
+@media (min-width: 1140px) {
+    #nav-container {
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+}
+
+@media (max-width: 585px) {
+    #nav-container .tagline {
+        display: none;
+    }
+}
