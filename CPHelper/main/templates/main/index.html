@@ -2,7 +2,11 @@
 
 {% block content %}
 
-<nav class="navbar bg-light container-xl">
+{% load static %}
+<link rel="stylesheet" href="{% static 'main/styleLand.css' %}">
+
+<div class="landing-page">
+    <nav class="navbar bg-light container-xl">
         <div id="nav-container" class="container-xl">
             <div class="logo">
                 <a class="navbar-brand" href="#">
@@ -89,6 +93,7 @@
                     <a href="https://codeforces.com/" target="_blank">CodeForces</a>
                     <a href="https://www.codechef.com/" target="_blank">CodeChef</a>
                     <a href="https://atcoder.jp/" target="_blank">AtCoder</a>
+                    <a href="https://leetcode.com/" target="_blank">LeetCode</a>
                 </div>
             </div>
             <div class="col-md-3 about-social">
@@ -116,5 +121,6 @@
             </div>
         </div>
     </div>
+</div>
 
 {% endblock %}
