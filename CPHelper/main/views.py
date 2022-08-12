@@ -5,7 +5,7 @@ from dateutil import parser
 
 #HEADERS = {'user-agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'}
 HEADERS = {}
-proxies = {'https': '135.148.2.22:444'}#'135.148.2.22:444', '204.199.174.68:999'}
+proxies = {'https': '116.202.13.106:8080'}#'135.148.2.22:444', '204.199.174.68:999'}
 
 def get_html(url, params = None):
 	html = requests.get(url, headers = HEADERS, params = params, verify = False, proxies = proxies)
@@ -15,7 +15,7 @@ def get_html(url, params = None):
 		print('Error code: {}'.format(html.status_code))
 		return 'Error'
 
-def atcoder():
+def atcoderdash():
 	html = get_html('https://atcoder.jp')
 	soup = BS(html, 'html.parser')
 	news = []
@@ -55,7 +55,7 @@ def atcoder():
 		news.append({'title': title, 'href': href, 'desc': desc, 'date': date, 'dateshow': dateshow})
 	return news
 
-def codechef():
+def codechefdash():
 	html = get_html('https://www.codechef.com/')
 	soup = BS(html, 'html.parser')
 	news = []
@@ -68,7 +68,7 @@ def codechef():
 		news.append({'title': title, 'href': href, 'desc': desc, 'date': date, 'dateshow': dateshow})
 	return news
 
-def cf():
+def cfdash():
 	html = get_html('https://codeforces.com')
 	soup = BS(html, 'html.parser')
 	news = []
@@ -88,20 +88,70 @@ def cf():
 		for el in list(descBlock.contents):
 			desc += str(el).replace('$$$', '')
 		news.append({'title': title, 'href': href, 'desc': desc, 'date': date, 'dateshow': dateshow})
-		if len(news) == 15:
-			break
 	return news
+
+def atcodercont():
+	html = get_html('https://atcoder.jp/contests/')
+	soup = BS(html, 'html.parser')
+	cont = []
+	for contest in soup.find('div', id = 'contest-table-upcoming').find_all('tr')[1:]:
+		title = contest.find_all('td')[1].find('a').text
+		href = 'https://atcoder.jp' + contest.find_all('td')[1].find('a').get('href')
+		date = contest.find('td').text.split()[0]
+		datehref = contest.find('td').find('a').get('href')
+		dur = contest.find_all('td')[-2].text
+		cont.append({'title': title, 'href': href, 'date': date, 'datehref': datehref, 'writer': 'AtCoder', 'dur': dur})
+	return cont
+
+def codechefcont():
+	html = get_html('https://www.codechef.com')
+	soup = BS(html, 'html.parser')
+	cont = []
+	for contest in soup.find_all('div', class_ = 'm-other-event-card'):
+		title = contest.find('h3', class_ = 'm-card-3__head').text
+		href = contest.get('onclick')
+		href = href[href.index("'") + 1:]
+		href = href[:href.index('?')]
+		date = contest.find('div', class_ = 'l-card-3__date-1-text').text + ' 2022'
+		cont.append({'title': title, 'href': href, 'date': date, 'datehref': '', 'writer': 'CodeChef'})
+	return cont
+
+def cfcont():
+	html = get_html('https://codeforces.com/contests?complete=true')
+	soup = BS(html, 'html.parser')
+	cont = []
+	for contest in soup.find('div', class_ = 'datatable').find_all('tr')[1:]:
+		title = contest.find('td').text
+		href = 'https://codeforces.com/contest/' + contest.get('data-contestid')
+		date = contest.find_all('td')[2].text.split()[0]
+		datehref = contest.find_all('td')[2].find('a').get('href')
+		dur = contest.find_all('td')[3].text
+		writer = ''
+		for aEl in contest.find_all('td')[1].find_all('a'):
+			aEl['href'] = 'https://codeforces.com' + aEl['href']
+			aEl['target'] = '_blank'
+		for el in list(contest.find_all('td')[1].contents):
+			writer += str(el)
+		cont.append({'title': title, 'href': href, 'date': date, 'datehref': datehref, 'writer': writer, 'dur': dur})
+	return cont
 
 def index(request):
 	return render(request, "main/index.html")
 
 def dashboard(request):
-	news = cf()
-	news += atcoder()
-	news += codechef()
+	news = cfdash()
+	news += atcoderdash()
+	news += codechefdash()
 	news.sort(key = lambda el: el['date'], reverse = True)
 	return render(request, "main/dashboard.html", {'news': news})
 
 def contests(request):
-	contests = []
+	contests = atcodercont()
+	contests += codechefcont()
+	contests += cfcont()
+	contests.sort(key = lambda el: parser.parse(el['date']))
+	row = 1
+	for x in range(len(contests)):
+		contests[x]['row'] = row
+		row += 1
 	return render(request, "main/contests.html", {'contests': contests})
