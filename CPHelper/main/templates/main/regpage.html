@@ -1,0 +1,46 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'main/styleReg.css' %}">
+
+<div id="reg-page" class="container-xl">
+    <div class="row">
+        <div class="col">
+            <div id="reg-form">
+                <p class="title">Sign up</p>
+                <form class="needs-validation" novalidate method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3 username">
+                        <label for="validationCustomUsername" class="form-label">Username</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="inputGroupPrepend">@</span>
+                             <input type="text" class="form-control" id="validationCustomUsername" name="username"
+                                aria-describedby="inputGroupPrepend" required maxlength="20">
+                            {% if errorname %}
+                                <div class="invalid-feedback" style="display: block;">
+                                    {{ errorname }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="mb-3 password">
+                        <label for="InputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control pass" name="password" id="InputPassword1" required maxlength="50">
+                        {% if errorpass %}
+                            <div class="invalid-feedback" style="display: block;">
+                                {{ errorpass }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3 button-submit"><button type="submit" class="btn btn-primary btn-submit"
+                            style="width: 100%;">Sign up</button></div>
+                    <p style="display: flex; justify-content: center;">Already a member? <a href="/login">Log in</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

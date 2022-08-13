@@ -1,0 +1,59 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'main/styleLog.css' %}">
+
+<div id="login-page" class="container-xl">
+    <div class="row">
+        <div id="welcome-text" class="col-xl-2">
+            <div class="sub-title">
+                nice to see you
+            </div>
+            <div class="title">
+                welcome back
+            </div>
+            <div class="text">
+                Thanks for being part of our smart CP helper startup. Get ready for user-friendly interface,
+                adaptation to any of your devices, satisfying design and regular updates. Easily to
+                sign up and log in. Our platform track only most popular CP platforms, latest news, upcoming
+                contests. Subscribe mode included, you can follow any platform you want and not even one. You will
+                definitely not regret about that.
+            </div>
+        </div>
+        <div id="login-input" class="col-xl-2">
+            <form class="row-g-3 needs-validation" novalidate method="POST">
+                {% csrf_token %}
+                <p class="title">Login</p>
+                <div class="mb-3 username">
+                    <label for="validationCustomUsername" class="form-label">Username</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend">@</span>
+                        <input type="text" class="form-control username-input" id="validationCustomUsername"
+                            aria-describedby="inputGroupPrepend" required name="username" maxlength="20">
+                        {% if errorname %}
+                            <div class="invalid-feedback" style="display: block;">
+                                {{ errorname }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <label for="inputPassword" class="form-label">Password</label>
+                <input type="password" id="inputPassword" class="form-control pass-input"
+                    aria-describedby="passwordHelpBlock" name="password" maxlength="50">
+                {% if errorpass %}
+                    <div class="invalid-feedback" style="display: block;">
+                        {{ errorpass }}
+                    </div>
+                {% endif %}
+                <div class="mb-3 button-submit"><button type="submit" class="btn btn-primary btn-submit"
+                        style="width: 100%; margin-top: 20px;">Log in</button></div>
+                <p style="display: flex; justify-content: center;">Don't have account? <a href="/signup">Sign up</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

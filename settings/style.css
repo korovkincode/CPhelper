@@ -18,7 +18,7 @@ body::before {
     position: absolute;
     left: 0;
     top: 0;
-    background-image: url('/cp/img/card-bg.jfif');
+    background-image: url('/static/main/card-bg.jfif');
     background-size: cover;
     width: 100%;
     min-height: 100vh;

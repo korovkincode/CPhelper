@@ -6,3 +6,4 @@ class Users(models.Model):
 	codeforces = models.CharField(max_length = 1)
 	atcoder = models.CharField(max_length = 1)
 	codechef = models.CharField(max_length = 1)
+	datesignup = models.CharField(max_length = 20)

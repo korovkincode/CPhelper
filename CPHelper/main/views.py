@@ -1,7 +1,10 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 import requests
 from bs4 import BeautifulSoup as BS
 from dateutil import parser
+from .models import Users
+from datetime import datetime
 
 #HEADERS = {'user-agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'}
 HEADERS = {}
@@ -139,13 +142,18 @@ def index(request):
 	return render(request, "main/index.html")
 
 def dashboard(request):
+	if request.session.get('username', 0) == 0:
+		return redirect('/signup')
 	news = cfdash()
 	news += atcoderdash()
 	news += codechefdash()
 	news.sort(key = lambda el: el['date'], reverse = True)
-	return render(request, "main/dashboard.html", {'news': news})
+	return render(request, "main/dashboard.html", {'news': news, 'username': request.session.get('username', 0)})
 
 def contests(request):
+	if request.session.get('username', 0) == 0:
+		return redirect('/signup')
+	print(request.session.get('username', 0))
 	contests = atcodercont()
 	contests += codechefcont()
 	contests += cfcont()
@@ -154,4 +162,61 @@ def contests(request):
 	for x in range(len(contests)):
 		contests[x]['row'] = row
 		row += 1
-	return render(request, "main/contests.html", {'contests': contests})
+	return render(request, "main/contests.html", {'contests': contests, 'username': request.session.get('username', 0)})
+
+def signup(request):
+	if request.session.get('username', 0):
+		return redirect('/dashboard')
+	if request.method == 'POST':
+		username = request.POST.get('username', '')
+		password = request.POST.get('password', '')
+		if username == '':
+			return render(request, "main/regpage.html", {'errorname': 'Fill in the username.'})
+		if password == '':
+			return render(request, "main/regpage.html", {'errorpass': 'Fill in the password.'})
+		if len(password) < 4:
+			return render(request, "main/regpage.html", {'errorpass': 'Password length must be at least 4.'})
+		try:
+			Users.objects.get(username = username)
+			return render(request, "main/regpage.html", {'errorname': 'This username is already in use. Try another'})
+		except:
+			pass
+		datesignup = str(datetime.now()).split()[0]
+		print(datesignup)
+		Users.objects.create(username = username, password = password, codeforces = '1', atcoder = '1', codechef = '1', datesignup = datesignup)
+		request.session['username'] = username
+		request.session['password'] = password
+		return redirect('/settings')
+	return render(request, "main/regpage.html")
+
+def login(request):
+	if request.session.get('username', 0):
+		return redirect('/dashboard')
+	if request.method == 'POST':
+		username = request.POST.get('username', '')
+		password = request.POST.get('password', '')
+		if username == '':
+			return render(request, "main/logpage.html", {'errorname': 'Fill in the username.'})
+		if password == '':
+			return render(request, "main/logpage.html", {'errorpass': 'Fill in the password.'})
+		try:
+			Users.objects.get(username = username)
+		except:
+			return render(request, "main/logpage.html", {'errorname': 'There is no account with this username. Try another'})
+		try:
+			Users.objects.get(username = username, password = password)
+		except:
+			return render(request, "main/logpage.html", {'errorpass': 'Password is incorrect. Try another'})
+		request.session['username'] = username
+		request.session['password'] = password
+		return redirect('/dashboard')
+	return render(request, "main/logpage.html")
+
+def logout(request):
+	if request.session.get('username', 0) == 0:
+		return redirect('/login')
+	request.session.flush()
+	return redirect('/login')
+
+def settings(request):
+	pass
