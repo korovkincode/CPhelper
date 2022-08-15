@@ -143,20 +143,29 @@ def index(request):
 
 def dashboard(request):
 	if request.session.get('username', 0) == 0:
-		return redirect('/signup')
-	news = cfdash()
-	news += atcoderdash()
-	news += codechefdash()
+		return redirect('/login')
+	news = []
+	curUser = Users.objects.get(username = request.session.get('username', 0))
+	if curUser.codeforces == '1':
+		news += cfdash()
+	if curUser.atcoder == '1':
+		news += atcoderdash()
+	if curUser.codechef == '1':
+		news += codechefdash()
 	news.sort(key = lambda el: el['date'], reverse = True)
 	return render(request, "main/dashboard.html", {'news': news, 'username': request.session.get('username', 0)})
 
 def contests(request):
 	if request.session.get('username', 0) == 0:
-		return redirect('/signup')
-	print(request.session.get('username', 0))
-	contests = atcodercont()
-	contests += codechefcont()
-	contests += cfcont()
+		return redirect('/login')
+	contests = []
+	curUser = Users.objects.get(username = request.session.get('username', 0))
+	if curUser.atcoder == '1':
+		contests += atcodercont()
+	if curUser.codechef == '1':
+		contests += codechefcont()
+	if curUser.codeforces == '1':
+		contests += cfcont()
 	contests.sort(key = lambda el: parser.parse(el['date']))
 	row = 1
 	for x in range(len(contests)):
@@ -219,4 +228,32 @@ def logout(request):
 	return redirect('/login')
 
 def settings(request):
-	pass
+	if request.session.get('username', 0) == 0:
+		return redirect('/login')
+	if request.method == 'POST':
+		username = request.session.get('username', 0)
+		codeforces = request.POST.get('codeforces', '')
+		codechef = request.POST.get('codechef', '')
+		atcoder = request.POST.get('atcoder', '')
+		if codeforces == 'on':
+			codeforces = '1'
+		else:
+			codeforces = '0'
+		if codechef == 'on':
+			codechef = '1'
+		else:
+			codechef = '0'
+		if atcoder == 'on':
+			atcoder = '1'
+		else:
+			atcoder = '0'
+		curUser = Users.objects.get(username = username)
+		curUser.codeforces = codeforces
+		curUser.codechef = codechef
+		curUser.atcoder = atcoder
+		curUser.save()
+
+	curUser = Users.objects.get(username = request.session.get('username', 0))
+	context = {'username': curUser.username, 'password': curUser.password, 'datesignup': curUser.datesignup, 'codeforces': curUser.codeforces,
+	'atcoder': curUser.atcoder, 'codechef': curUser.codechef}
+	return render(request, "main/setpage.html", context)

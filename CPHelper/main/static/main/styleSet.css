@@ -89,7 +89,7 @@ body::before {
     position: absolute;
     z-index: -1;
     content: "";
-    background-image: url(/cp/img/card-bg.jfif);
+    background-image: url(/static/main/card-bg.jfif);
     opacity: 0.5        ;
     background-size: cover;
     width: 100%;

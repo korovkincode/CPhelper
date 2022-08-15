@@ -1,0 +1,89 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'main/styleSet.css' %}">
+
+<nav class="navbar container-xl">
+    <div id="nav-container" class="container-xl">
+        <div class="logo">
+            <a class="navbar-brand" href="index.html">
+                <img src="/static/main/logo-removebg-preview.png" alt="" width="100px" height="30px">
+            </a>
+        </div>
+        <div class="tagline txt-rotate" data-rotate='["Your smart CP platforms tracker"]'>
+            <!--Your smart CP platforms tracker-->
+        </div>
+        <div id="nav-dropdown" class="dropdown">
+            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                data-bs-reference="parent">
+                {{ username }}
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-start">
+                <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+                <li><a class="dropdown-item" href="/contests">Contests</a></li>
+                <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                <li><a class="dropdown-item" href="/logout">Exit</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id="settings" class="container-xl">
+    <div class="title" style="width:100%;">settings</div>
+    <div id="about-user" class="settings-block"> 
+        <div class="active-side">
+            <div class="title">your profile</div>
+            <div class="text info">
+                <div class="nickname">
+                    <p class="text">Nickname: {{ username }}</p>
+                </div>
+                <div class="password">
+                    <p class="text">Password: {{ password }}</p>
+                </div>
+                <div class="sub-date">
+                    <p class="text">You have been alredy subscribed since {{ datesignup }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div id="sub-platforms" class="settings-block">
+            <div class="active-side">
+                <div class="title">Platforms</div>
+                    <div class="form-check form-switch">
+                        {% if codeforces == "1" %}
+                            <input class="form-check-input" name="codeforces" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+                        {% else %}
+                            <input class="form-check-input" name="codeforces" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        {% endif %}
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Codeforces</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        {% if codechef == "1" %}
+                            <input class="form-check-input" name="codechef" type="checkbox" role="switch" id="flexSwitchCheckDefault1" checked>
+                        {% else %}
+                            <input class="form-check-input" name="codechef" type="checkbox" role="switch" id="flexSwitchCheckDefault1">
+                        {% endif %}
+                        <label class="form-check-label" for="flexSwitchCheckDefault1">CodeChef</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        {% if atcoder == "1" %}
+                            <input class="form-check-input" name="atcoder" type="checkbox" role="switch" id="flexSwitchCheckDefault2" checked>
+                        {% else %}
+                            <input class="form-check-input" name="atcoder" type="checkbox" role="switch" id="flexSwitchCheckDefault2">
+                        {% endif %}
+                        <label class="form-check-label" for="flexSwitchCheckDefault2">AtCoder</label>
+                    </div>
+            </div>
+            <div class="passive-side"> 
+                <div class="text">Here you can follow CP platforms. <br> Toggle on to follow, then apply to save</div>
+                <button class="btn btn-primary" type="submit">Apply</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
